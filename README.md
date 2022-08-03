@@ -1,17 +1,17 @@
 #  SimpleMemoryEventBus
 
-## 1.±àĞ´ÊÂ¼ş¼°ÊÂ¼ş´¦ÀíÆ÷
+## 1.ç¼–å†™äº‹ä»¶åŠäº‹ä»¶å¤„ç†å™¨
 
 ```c#
-//ÊÂ¼ş
-//¼Ì³ĞSimpleEventÒÔÀ©Õ¹ÊÂ¼şĞèÒª´«µİµÄÊı¾İ
+//äº‹ä»¶
+//ç»§æ‰¿SimpleEventä»¥æ‰©å±•äº‹ä»¶éœ€è¦ä¼ é€’çš„æ•°æ®
 public class SendPublicMessageEvent : SimpleEvent
 {
         public string Message { get; set; }
 }
-//ÊÂ¼ş´¦ÀíÆ÷
-//BindSimpleHandleÌØĞÔ±ê×¢ÁËÕâÊÇÒ»¸ö´¦ÀíÆ÷£¬±ãÓÚºóĞøµÄ×¢²áÊÂ¼ş´¦ÀíÆ÷²Ù×÷£¬²ÎÊıÎªÊÂ¼şid
-//ISimpleEventHandler<T> T:±íÊ¾Òª´¦ÀíµÄÊÂ¼ş
+//äº‹ä»¶å¤„ç†å™¨
+//BindSimpleHandleç‰¹æ€§æ ‡æ³¨äº†è¿™æ˜¯ä¸€ä¸ªå¤„ç†å™¨ï¼Œä¾¿äºåç»­çš„æ³¨å†Œäº‹ä»¶å¤„ç†å™¨æ“ä½œï¼Œå‚æ•°ä¸ºäº‹ä»¶id
+//ISimpleEventHandler<T> T:è¡¨ç¤ºè¦å¤„ç†çš„äº‹ä»¶
 [BindSimpleHandle(101)]
 public class SendPublicMessageHandle : ISimpleEventHandler<SendPublicMessageEvent>
 {
@@ -23,20 +23,20 @@ public class SendPublicMessageHandle : ISimpleEventHandler<SendPublicMessageEven
 }
 ```
 
-## 2.×¢²áEventBusµ½IOCÖĞ£¨ÕâÀïÊÇ.NetCore×Ô´øIOC£©
+## 2.æ³¨å†ŒEventBusåˆ°IOCä¸­ï¼ˆè¿™é‡Œæ˜¯.NetCoreè‡ªå¸¦IOCï¼‰
 
 ```c#
-//»ñÈ¡ISimpleEventHandlerÊµÏÖÀàËùÔÚµÄ³ÌĞò¼¯
+//è·å–ISimpleEventHandlerå®ç°ç±»æ‰€åœ¨çš„ç¨‹åºé›†
 var asm = typeof(T).Assembly;
-//×¢ÈëÊ±Ğ¯´ø³ÌĞò¼¯²ÎÊı¼´¿É
+//æ³¨å…¥æ—¶æºå¸¦ç¨‹åºé›†å‚æ•°å³å¯
 services.AddSimpleMemoryEventBus(new[] { asm });
 ```
 
-## 3.·¢²¼Ò»¸öÊÂ¼ş
+## 3.å‘å¸ƒä¸€ä¸ªäº‹ä»¶
 
 ```c#
 var @event = new SendPublicMessageEvent() { EventId = 101, Message = "666" };
-eventBus.Publish(@event);
-//Ö®ºóÎÒÃÇ¾Í»á¿´µ½¿ØÖÆÌ¨´òÓ¡³öSendPublicMessageHandle:666¾ÍËµÃ÷³É¹¦ÁË£¡
+eventBus.Publish(@event); //eventBusé€šè¿‡ä¾èµ–æ³¨å…¥è·å–
+//ä¹‹åæˆ‘ä»¬å°±ä¼šçœ‹åˆ°æ§åˆ¶å°æ‰“å°å‡ºSendPublicMessageHandle:666å°±è¯´æ˜æˆåŠŸäº†ï¼
 ```
 
